@@ -1,6 +1,8 @@
 import os
 import telebot
 from dotenv import load_dotenv
+from src.commands.general.index import start
+from src.utils.message import send_text
 
 load_dotenv()
 TG_TOKEN = os.getenv("TG_TOKEN")
@@ -16,7 +18,8 @@ def main():
 
 @bot.message_handler(commands=["start", "help"])
 def send_welcome(message: telebot.types.Message):
-    bot.reply_to(message, "Hello! I'm a bot that will help you manage your waifu list")
+    response = start(message)
+    send_text(bot, message.chat.id, response["message"])
 
 
 @bot.message_handler(func=lambda message: True)

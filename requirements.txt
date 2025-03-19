@@ -1,3 +1,4 @@
 pyTelegramBotAPI
 dotenv
 jurigged
+requests
