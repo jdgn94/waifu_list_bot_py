@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 load_dotenv()
 base_url: str = os.getenv("API_BASE_URL")

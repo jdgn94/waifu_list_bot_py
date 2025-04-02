@@ -3,12 +3,11 @@ import telebot
 from dotenv import load_dotenv
 from src.commands.general.index import start
 from src.utils.message import send_text
+from src.utils.functions import chat_is_group, debug_message
 
 load_dotenv()
 TG_TOKEN = os.getenv("TG_TOKEN")
 bot = telebot.TeleBot(TG_TOKEN)
-
-from src.utils.functions import chat_is_group, chat_is_private
 
 
 def main():
@@ -29,8 +28,10 @@ def echo(message: telebot.types.Message):
         # TODO: increment message count if group in database
         print("increment message count")
         return
-    print("new message on bot (this message is edited)")
-    bot.reply_to(message, message.text)
+    debug_message({"message": message, "level": "info"})
+    send_text(
+        bot, message.chat.id, "Echo: " + message.text, reply_to_message_id=message.id
+    )
 
 
 if __name__ == "__main__":
