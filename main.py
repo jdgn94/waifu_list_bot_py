@@ -26,8 +26,8 @@ def user_info(message: telebot.types.Message):
     if chat_not_supported(message):
         return send_text(bot, message.chat.id, "This chat type is not supported")
 
-    message = info(message)
-    return send_text(bot, message.chat.id, message, reply_to_message_id=message.id)
+    text = info(message)
+    return send_text(bot, message.chat.id, text, reply_to_message_id=message.id)
 
 
 @bot.message_handler(func=lambda message: True)

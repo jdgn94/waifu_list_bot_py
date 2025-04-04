@@ -7,6 +7,7 @@ from translations.index import messages
 class LogLevel(Enum):
     DEBUG = "debug"
     INFO = "info"
+    SUCCESS = "success"
     WARNING = "warning"
     ERROR = "error"
     CRITICAL = "critical"
@@ -19,10 +20,12 @@ type LogMessage = dict["message":str, "level" : LogLevel | LogLevel("info")]
 def debug_message(values: LogMessage | list[LogMessage]):
     def printMessage(value: LogMessage):
         level = value["level"]
-        color = ""
+        color = None
         background = None
         if level == "info":
             color = "blue"
+        elif level == "success":
+            color = "green"
         elif level == "debug":
             color = "magenta"
         elif level == "warning":

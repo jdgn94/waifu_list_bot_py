@@ -156,4 +156,16 @@ messages = {
         "en": "For more information, send the command `/info` in a private chat with this bot.",
         "es": "Para mas información envíe el comando `/info` en un chat privado con este bot.",
     },
+    "error_profile": {
+        "en": "Profile not found",
+        "es": "Perfil no encontrado",
+    },
+    "error_chat": {
+        "en": "Chat not found",
+        "es": "Chat no encontrado",
+    },
+    "register_date": {
+        "en": "Register Date",
+        "es": "Fecha de Registro",
+    },
 }
