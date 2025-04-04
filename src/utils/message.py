@@ -20,5 +20,6 @@ def send_text(
         reply_markup=reply_markup,
         disable_web_page_preview=disable_web_page_preview,
         timeout=timeout,
+        parse_mode="MarkdownV2",
         **kwargs
     )

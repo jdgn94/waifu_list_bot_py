@@ -5,9 +5,11 @@ from src.utils.functions import (
     chat_is_group,
     chat_is_private,
     chat_not_supported,
+    get_message,
     language_code,
     debug_message,
 )
+from src.utils.message import send_text
 
 
 def start(message: types.Message):
@@ -43,3 +45,42 @@ def start(message: types.Message):
     else:
         print("chat type not supported")
         return {"status": "error", "message": "Chat type not supported"}
+
+
+def info(message: types.Message):
+    print("getting user info")
+    profile = get_profile(message.from_user.id)
+    if not profile:
+        return "Profile not found"
+
+    chat = get_chat(message.chat.id)
+    if not chat:
+        return "Chat not found"
+
+    debug_message({"message": f"profile: {profile}\nchat: {chat}", "level": "info"})
+
+    language_code = chat.language
+    more_info = f"ℹ️ {get_message("more_info", language_code)}"
+    if chat_is_private(message):
+        more_info = f"""
+            
+        ⬆️ {get_message("exp", language_code)}: {profile.exp} / {profile.limit_exp}
+        🪙 {get_message("coins", language_code)}: {profile.coins}
+        💎 {get_message("diamonds", language_code)}: {profile.diamonds}
+        📄 {get_message("favorite_pages", language_code)}: {profile.favorite_pages}
+        📄 {get_message("favorite_pages_purchased", language_code)}: {profile.favorite_pages_purchased}
+        """
+
+    text = f"""
+    {get_message("info", language_code)}
+    
+    {message.from_user.username}
+    Telegram ID: {message.from_user.id}
+    
+    ------------------------------------------
+    
+    💪 {get_message("level", language_code)}: {profile.level}
+    {more_info}
+    """
+
+    return text

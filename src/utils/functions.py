@@ -1,6 +1,7 @@
 from enum import Enum
 from telebot import types
-from termcolor import colored, cprint
+from termcolor import colored
+from translations.index import messages
 
 
 class LogLevel(Enum):
@@ -61,3 +62,7 @@ def language_code(message: types.Message):
 
 def is_bot(message: types.Message):
     return message.from_user.is_bot
+
+
+def get_message(key: str, language_code: str):
+    return messages[key][language_code]
